@@ -8,7 +8,8 @@
 if [[ $COLORTERM = gnome-* && $TERM = xterm ]] && infocmp gnome-256color >/dev/null 2>&1; then
 	export TERM='gnome-256color';
 elif infocmp xterm-256color >/dev/null 2>&1; then
-	export TERM='xterm-256color';
+#	export TERM='xterm-256color';
+	export TERM='screen-256color';
 fi;
 
 prompt_git() {
@@ -93,9 +94,11 @@ fi;
 
 # Highlight the user name when logged in as root.
 if [[ "${USER}" == "root" ]]; then
-	userStyle="${red}";
+#	userStyle="${red}";
+	userStyle="${cyan}";
 else
-	userStyle="${orange}";
+	#userStyle="${orange}";
+	userStyle="${blue}";
 fi;
 
 # Highlight the hostname when connected via SSH.
@@ -109,11 +112,13 @@ fi;
 PS1="\[\033]0;\W\007\]"; # working directory base name
 PS1+="\[${bold}\]\n"; # newline
 PS1+="\[${userStyle}\]\u"; # username
-PS1+="\[${white}\] at ";
-PS1+="\[${hostStyle}\]\h"; # host
+# PS1+="\[${white}\] at ";
+# PS1+="\[${hostStyle}\]\h"; # host
 PS1+="\[${white}\] in ";
 PS1+="\[${green}\]\w"; # working directory full path
-PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+# PS1+="\$(prompt_git \"\[${white}\] on \[${violet}\]\" \"\[${blue}\]\")"; # Git repository details
+PS1+="\$(prompt_git \"\[${white}\] on \[${orange}\]\" \"\[${violet}\]\")"; # Git repository details
+
 PS1+="\n";
 PS1+="\[${white}\]\$ \[${reset}\]"; # `$` (and reset color)
 export PS1;
